@@ -1,0 +1,68 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        Form submitted ? {{myForm.submitted}}
+        Form valid ? {{myForm.valid}}
+        Form invalid ? {{myForm.invalid}} 
+    </div>
+
+    <fieldset>
+        <div>
+            <label for="firstname-order">FirstName</label>
+            <input id="firstname-order" name="firstname-order" type="text" [(ngModel)]="model.firstname" #firstname="ngModel" required
+                minlength="5">
+        </div>
+
+        <div *ngIf="myForm.submitted&&firstname.errors">
+            <span *ngIf="firstname.errors?.['required']">Le Nom est requis</span>
+            <span *ngIf="firstname.errors?.['minlength']">La longueur minimale doit être supérieure à 3</span>
+            <span *ngIf="firstname.errors?.['maxlength']">La longueur maximale doit être inférieure à 15</span>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <div>
+            <label for="lastname-order">LastName</label>
+            <input id="lastname-order" name="lastname-order" type="text" [(ngModel)]="model.lastname" #lastname="ngModel" required
+                minlength="5">
+        </div>
+
+        <div *ngIf="myForm.submitted&&lastname.errors">
+            <span *ngIf="lastname.errors?.['required']">Le Prénom est requis</span>
+            <span *ngIf="lastname.errors?.['minlength']">La longueur minimale doit être supérieure à 3</span>
+            <span *ngIf="lastname.errors?.['maxlength']">La longueur maximale doit être inférieure à 15</span>
+        </div>
+    </fieldset>
+
+
+
+
+
+    <fieldset>
+        <div>
+            <label for="password-order">Password</label>
+            <input id="password-order" name="password-order" [(ngModel)]="model.password" #password="ngModel"
+                type="number" required>
+        </div>
+        <div *ngIf="myForm.submitted&&password.errors">
+            <span *ngIf="password.errors?.['required']">Le Password est requis</span>
+        </div>
+    </fieldset>
+  
+    <fieldset>
+        <div>
+            <label for="contact-order">Contact</label>
+            <input id="contact-order" name="contact-order" [(ngModel)]="model.contact" #contact="ngModel" type="email"
+                required email>
+        </div>
+
+        <div *ngIf="myForm.submitted&&contact.errors">
+            <span *ngIf="contact.errors?.['required']">Le champ email est requis</span>
+            <span *ngIf="contact.errors?.['email']">L'adresse email doit être valide</span>
+        </div>
+
+    </fieldset>
+
+    <button type="reset">Restaurer</button>
+    <button type="submit">Sauvegarder</button>
+</form>
